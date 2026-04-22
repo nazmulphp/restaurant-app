@@ -1,0 +1,6 @@
+<?php
+require_once __DIR__ . '/bootstrap.php';
+$method = request_method(); $data = request_data();
+if ($method === 'GET') { $group = query('group', ''); if ($group !== '') { respond(['success' => true, 'items' => db_all('SELECT * FROM faqs WHERE status = 1 AND faq_group = ? ORDER BY sort_order, id', [$group])]); } respond(['success' => true, 'items' => db_all('SELECT * FROM faqs WHERE status = 1 ORDER BY faq_group, sort_order, id')]); }
+require_admin(); if ($method === 'POST' && empty($data['id'])) { $id = db_insert('INSERT INTO faqs (question, answer, faq_group, sort_order, status) VALUES (?, ?, ?, ?, ?)', [trim((string)$data['question']), trim((string)$data['answer']), trim((string)($data['faq_group'] ?? 'General')), (int)($data['sort_order'] ?? 0), (int)($data['status'] ?? 1)]); respond(['success' => true, 'id' => $id]); }
+$id = (int)($data['id'] ?? query('id', 0)); if ($method === 'PUT' || ($method === 'POST' && ($data['_method'] ?? '') === 'PUT')) { db_exec('UPDATE faqs SET question=?, answer=?, faq_group=?, sort_order=?, status=? WHERE id=?', [trim((string)$data['question']), trim((string)$data['answer']), trim((string)($data['faq_group'] ?? 'General')), (int)($data['sort_order'] ?? 0), (int)($data['status'] ?? 1), $id]); respond(['success' => true]); } db_exec('DELETE FROM faqs WHERE id=?', [$id]); respond(['success' => true]);

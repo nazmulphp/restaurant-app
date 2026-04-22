@@ -1,0 +1,7 @@
+{
+  "name": "Cosmic Burger",
+  "description": "A galactic-themed burger restaurant website with a core PHP backend and MySQL database integration.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

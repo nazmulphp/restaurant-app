@@ -1,0 +1,29 @@
+Cosmic Burger Full Dynamic Backend Setup
+
+1. Create database and import schema.sql
+2. Update php-backend/config.php with your database host, name, user, and password
+3. Upload all files to your server
+4. Make sure PHP session is enabled
+5. Login with your admin account from the existing admin login page
+
+New dynamic backend modules:
+- Customer auth and account
+- Products and categories CRUD
+- Orders and payment status updates
+- Wishlist
+- Reviews
+- Coupons
+- Reservations
+- Blog and blog categories
+- Testimonials
+- FAQ
+- Gallery
+- Banners
+- Contact messages
+- Newsletter subscribers
+- Delivery zones
+- CMS style pages
+- SEO meta manager
+- Reports API
+
+JSON endpoints are in php-backend/
